@@ -8,16 +8,28 @@ struct News: Codable {
 
 struct Article: Codable {
     let title: String
+    let description: String? //contentはnullの場合もあるから
 }
 
 struct ContentView: View {
     @State private var articles: [Article] = []
 
     var body: some View {
+        NavigationView {
+            List(articles, id: \.title) { article in
+                NavigationLink(destination: Text(article.description ?? "No content available")) {
+                    Text(article.title)
+                }
+            }
+            .onAppear(perform: loadNews)
+        }
+            /*
         List(articles, id: \.title) { article in
             Text(article.title)
         }
         .onAppear(perform: loadNews)
+        */
+            
     }
 
     func loadNews() {
