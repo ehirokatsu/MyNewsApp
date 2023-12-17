@@ -15,6 +15,12 @@ struct ContentView: View {
     @State private var articles: [Article] = []
 
     var body: some View {
+
+        var a = 20
+        HStack {
+            Text("TEST")
+            Text("\(a)")
+        }
         NavigationView {
             List(articles, id: \.title) { article in
                 NavigationLink(destination: Text(article.description ?? "No content available")) {
